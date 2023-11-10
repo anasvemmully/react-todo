@@ -1,0 +1,36 @@
+.todocreate {
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+}
+
+.todoinput {
+
+    padding: 0.6rem 0.8rem;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid rgba(184, 184, 184, 0.5);
+    width: 100%;
+    box-shadow: 1px 2px 3px rgba(192, 192, 192, 0.8);
+
+
+}
+
+.totdobutton {
+
+    outline: none;
+    background-color: black;
+    border: 1px solid rgba(196, 118, 118, 0.2);
+    box-shadow: 1px 2px 3px rgba(192, 192, 192, 0.8);
+
+    width: 2rem;
+    height: 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 1.6rem;
+
+}
