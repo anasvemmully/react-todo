@@ -8,15 +8,31 @@
 
 }
 
-.todo-element input {
+.todo-element .input {
 
     background-color: transparent;
     color: black;
     width: 100%;
     border: none;
     outline: none;
+    cursor: pointer;
 
 }
+
+.strike {
+    
+    text-decoration: line-through;
+    opacity: 0.5;
+    
+}
+
+.strike-hover:hover {
+    
+    text-decoration: line-through;
+    opacity: 0.5;
+
+}
+
 
 .todo-element-cancel, .todo-element-update, .todo-element-delete, .todo-element-done {
     height: 1.2rem;

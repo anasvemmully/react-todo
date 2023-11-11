@@ -1,37 +1,45 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './TodoElement.css'
 
-function TodoElement({ index, element, todosDelete }) {
+function TodoElement({ index, element, todosDelete, todosDone, taskDone, letCelebrate }) {
 
     const [t, setT] = useState(element.task);
     const [editMode, seteditMode] = useState(false);
 
     const inputRef = useRef(null);
 
-    const toggleEditMode = () => seteditMode(!editMode);
+    const toggleEditMode = () => {
+        inputRef.current.contentEditable = !editMode
+        inputRef.current.classList.toggle('strike-hover');
+        seteditMode(!editMode)
+    }
 
     const todoEdit = () => {
         toggleEditMode()
-        inputRef.current.disabled = false
         inputRef.current.focus()
     }
 
     const todoCancel = () => {
         toggleEditMode()
-        inputRef.current.disabled = true
         setT(element.task)
     }
 
-    const todoDone = () => {}
 
-    console.log("incomponenet")
+    useEffect(() => {
+
+        setT(element.task)
+
+    }, [element.task])
 
     return (
-        <div className='todo-element'>
-            <span>{index}</span>
-            <input ref={inputRef} type="text" value={t} disabled onChange={(e) => setT(e.target.value)
-            } />
-            {editMode === false ?
+        <div className='todo-element' >
+            <div className={`input ${element.isdone === true ? "strike" : "strike-hover"}`} ref={inputRef} type="text" contentEditable={editMode} suppressContentEditableWarning={true} onChange={
+                (e) => setT(e.target.innerText)
+            } onClick={element.isdone === true ? null : () => {
+                letCelebrate()
+                taskDone(index)
+            }}>{t}</div>
+            {editMode === false ? element.isdone === true ? <></> :
                 <>
                     <div>
                         <button onClick={todoEdit} className='todo-element-update'>
@@ -51,7 +59,10 @@ function TodoElement({ index, element, todosDelete }) {
                 :
                 <>
                     <div>
-                        <button onClick={() => todoDone()} className='todo-element-done'>
+                        <button onClick={() => {
+                            toggleEditMode()
+                            todosDone(index, t)
+                        }} className='todo-element-done'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
